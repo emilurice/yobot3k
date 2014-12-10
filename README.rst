@@ -1,7 +1,9 @@
 YOBOT3K
 =======
 
-.. image:: http://img.shields.io/badge/Built%20at-%23dotastro-blue.svg?style=flat
+.. image:: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
+        :target: https://github.com/dfm/yobot3k/blob/master/LICENSE
+.. image:: http://img.shields.io/badge/Built%20at-%23dotastro-green.svg?style=flat
         :target: http://dotastronomy.com/six
 
 
