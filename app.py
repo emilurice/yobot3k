@@ -28,6 +28,7 @@ class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
             (r"/", IndexHandler),
+            (r"/{0}".format(os.environ.get("YO_API_PATH", "")), YoHandler),
             (r"/fact", FactHandler),
             (r"/fact.txt", FactTxtHandler),
         ]
@@ -45,6 +46,12 @@ class Application(tornado.web.Application):
 class IndexHandler(tornado.web.RequestHandler):
 
     def get(self):
+        self.render("fact.html", fact="\"YO AT ME\" — YOBOT3K")
+
+
+class YoHandler(tornado.web.RequestHandler):
+
+    def get(self):
         username = self.get_argument("username", None)
         if username is not None:
             params = dict(
@@ -53,7 +60,7 @@ class IndexHandler(tornado.web.RequestHandler):
                 link="http://yo.dfm.io/fact",
             )
             requests.post("https://api.justyo.co/yo/", data=params)
-        self.render("fact.html", fact="\"YO AT ME\" — YOBOT3K")
+        raise tornado.web.HTTPError(404)
 
 
 class FactHandler(tornado.web.RequestHandler):
