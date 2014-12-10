@@ -29,6 +29,7 @@ class Application(tornado.web.Application):
         handlers = [
             (r"/", IndexHandler),
             (r"/fact", FactHandler),
+            (r"/fact.txt", FactTxtHandler),
         ]
         settings = dict(
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
@@ -59,6 +60,13 @@ class FactHandler(tornado.web.RequestHandler):
 
     def get(self):
         self.render("fact.html", fact=facts[random.randint(0, len(facts))])
+
+
+class FactTxtHandler(tornado.web.RequestHandler):
+
+    def get(self):
+        self.set_header("Content-Type", "text/plain")
+        self.write(facts[random.randint(0, len(facts))])
 
 
 def main():
